@@ -1,0 +1,68 @@
+<div class="login-page-container">
+
+  <div class="image-column">
+    <img src="img/mustang.png" alt="Ranger" class="car-image">
+  </div>
+
+  <div class="form-column">
+
+    <form (ngSubmit)="login()">
+
+      <h2>Login</h2>
+
+      <!-- Usuário -->
+      <div>
+        <label for="username">Nome de Usuário:</label>
+        <input 
+          id="username"
+          type="text"
+          [(ngModel)]="username"
+          name="username"
+          required
+          minlength="3"
+          placeholder="Digite 'admin'"
+          #userField="ngModel"
+          [class.invalid-input]="userField.invalid && userField.touched"
+        >
+
+        <div *ngIf="userField.invalid && userField.touched" class="validation-error">
+          <small *ngIf="userField.errors?.['required']">O nome é obrigatório.</small>
+          <small *ngIf="userField.errors?.['minlength']">Mínimo 3 caracteres.</small>
+        </div>
+      </div>
+
+      <!-- Senha -->
+      <div>
+        <label for="password">Senha:</label>
+        <input 
+          id="password"
+          type="password"
+          [(ngModel)]="password"
+          name="password"
+          required
+          minlength="4"
+          placeholder="Digite 'admin'"
+          #passwordField="ngModel"
+          [class.invalid-input]="passwordField.invalid && passwordField.touched"
+        >
+
+        <div *ngIf="passwordField.invalid && passwordField.touched" class="validation-error">
+          <small *ngIf="passwordField.errors?.['required']">A senha é obrigatória.</small>
+          <small *ngIf="passwordField.errors?.['minlength']">Mínimo 4 caracteres.</small>
+        </div>
+      </div>
+
+      <!-- Erro -->
+      <div *ngIf="errorMessage" class="login-error">
+        {{ errorMessage }}
+      </div>
+
+      <!-- Botão -->
+      <button type="submit" [disabled]="userField.invalid || passwordField.invalid">
+        Entrar
+      </button>
+
+    </form>
+
+  </div>
+</div>

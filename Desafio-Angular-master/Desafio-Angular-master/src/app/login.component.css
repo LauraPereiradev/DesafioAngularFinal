@@ -1,0 +1,84 @@
+.login-page-container {
+  display: flex;
+  height: 100vh;
+  background: #f4f4f4;
+}
+
+.image-column {
+  width: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+}
+
+.car-image {
+  width: 90%;        /* imagem maior */
+  max-width: 650px;  /* limite maior */
+}
+
+.form-column {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #0b1d46;
+}
+
+form {
+  width: 70%;
+  background: white;
+  padding: 35px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+}
+
+form h2 {
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.invalid-input {
+  border-color: red !important;
+}
+
+.validation-error {
+  color: red;
+  font-size: 12px;
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
+
+.login-error {
+  background: #ffdddd;
+  color: #a10000;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background: #0b1d46;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:disabled {
+  background: gray;
+  cursor: not-allowed;
+}

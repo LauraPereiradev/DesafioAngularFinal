@@ -1,0 +1,61 @@
+<!-- 
+  Layout Principal 
+  A classe 'sidebar-open' é adicionada/removida dinamicamente
+-->
+<div class="home-layout" [class.sidebar-open]="isSidebarOpen">
+  
+  <!-- Barra Lateral (Sidebar) -->
+  <aside class="sidebar">
+    
+    <div class="sidebar-header">
+      <img src="img/ford.png" alt="Logo Ford" class="sidebar-logo">
+    </div>
+
+    <!-- Links de Navegação (AGORA SÃO BOTÕES) -->
+    <nav class="sidebar-nav">
+      
+      <button routerLink="/home" routerLinkActive="active" class="nav-link" (click)="toggleSidebar()">
+        <i class="fa-solid fa-house"></i>
+        <span>Home</span>
+      </button>
+
+      <button routerLink="/dashboard" routerLinkActive="active" class="nav-link" (click)="toggleSidebar()">
+        <i class="fa-solid fa-chart-line"></i>
+        <span>Dashboard</span>
+      </button>
+
+    </nav>
+
+    <!-- Botão de Sair -->
+    <div class="sidebar-footer">
+      <button (click)="logout()" class="nav-link logout-button">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        <span>Sair</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Overlay escuro (para fechar a sidebar ao clicar fora) -->
+  <div class="sidebar-overlay" (click)="toggleSidebar()"></div>
+
+  <!-- Conteúdo Principal -->
+  <div class="content-wrapper">
+    
+    <!-- Barra Superior com Botão Hambúrguer -->
+    <header class="content-header">
+      <button class="menu-toggle-btn" (click)="toggleSidebar()">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </header>
+
+    <main class="main-content">
+      <img src="img/ranger.png" alt="Plano de fundo Ford Ranger" class="background-image">
+      <div class="welcome-box">
+        <h3>Sistema de Gestão FORD</h3>
+        <h1>Seja bem-vindo(a), {{ userName }}!</h1>
+        <p>Utilize o menu lateral para navegar.</p>
+      </div>
+    </main>
+  </div>
+
+</div>
