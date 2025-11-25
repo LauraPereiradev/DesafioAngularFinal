@@ -1,97 +1,72 @@
 <!-- === DASHBOARD FORD STYLE (HTML) — COMPATÍVEL COM A API REAL === -->
 <div class="dashboard-container">
 
-    <!-- 🔵 HEADER -->
-    <div class="ford-header text-center mb-4">
-      <h2>FORD • Dashboard de Veículos</h2>
-      <p>Monitoramento dos dados da frota em tempo real</p>
-    </div>
+  <!-- 🔵 HEADER -->
+  <div class="ford-header text-center mb-4">
+    <h2>FORD • Dashboard de Veículos</h2>
+    <p>Monitoramento dos dados da frota em tempo real</p>
+  </div>
+  <button class="back-button" onclick="history.back()">Voltar</button>
 
-   <!-- NAVBAR SUPERIOR -->
-<header class="ford-navbar">
-  <span class="menu-btn" onclick="toggleSidebar()">&#9776;</span>
-  <img src="assets/img/ford-logo.png" alt="Ford" class="ford-top-logo">
-</header>
 
-<!-- SIDEBAR LATERAL -->
-<nav id="sidebar" class="sidebar">
-  <div class="sidebar-header">
-      <img src="assets/img/ford-logo.png" class="sidebar-logo">
+  <!-- 🔵 SELEÇÃO DE MODELO -->
+  <div class="card ford-card p-4 mb-4">
+    <h4 class="card-title">Selecione o Modelo</h4>
+    <select class="form-control mt-3" [(ngModel)]="selectedModel" (change)="selectVehicle()">
+      <option value="">Selecione um modelo...</option>
+      <option *ngFor="let v of vehicles" [value]="v.vehicle">{{ v.vehicle }}</option>
+    </select>
   </div>
 
-  <ul class="sidebar-menu">
-      <li><a href="/home"><i class="fas fa-home"></i> Home</a></li>
-      <li><a href="/dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-  </ul>
+  <!-- 🔵 CARDS DE INFORMAÇÕES DO MODELO SELECIONADO -->
+  <div *ngIf="selectedVehicle" class="row text-center mb-4 ford-numbers">
 
-  <div class="sidebar-footer">
-      <a href="/logout"><i class="fas fa-sign-out-alt"></i> Sair</a>
+    <div class="col-md-4 mb-3">
+      <div class="card ford-number-card p-3">
+        <h6>Total de Vendas</h6>
+        <h2>{{ selectedVehicle.volumetotal }}</h2>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <div class="card ford-number-card p-3">
+        <h6>Veículos Conectados</h6>
+        <h2>{{ selectedVehicle.connected }}</h2>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <div class="card ford-number-card p-3">
+        <h6>Software Atualizado</h6>
+        <h2>{{ selectedVehicle.softwareUpdates }}</h2>
+      </div>
+    </div>
+
   </div>
-</nav>
 
-<!-- OVERLAY AO ABRIR MENU -->
-<div id="overlay" class="overlay" onclick="toggleSidebar()"></div>
-D
-  
-    <!-- 🔵 SELEÇÃO DE MODELO -->
-    <div class="card ford-card p-4 mb-4">
-      <h4 class="card-title">Selecione o Modelo</h4>
-      <select class="form-control mt-3" [(ngModel)]="selectedModel" (change)="selectVehicle()">
-        <option value="">Selecione um modelo...</option>
-        <option *ngFor="let v of vehicles" [value]="v.vehicle">{{ v.vehicle }}</option>
-      </select>
-    </div>
+  <!-- 🔵 IMAGEM DO VEÍCULO -->
+  <div class="text-center mb-5" *ngIf="selectedVehicle">
+    <img [src]="selectedVehicle.img" class="vehicle-image" alt="Imagem do veículo">
+  </div>
 
-  
-    <!-- 🔵 CARDS DE INFORMAÇÕES DO MODELO SELECIONADO -->
-    <div *ngIf="selectedVehicle" class="row text-center mb-4 ford-numbers">
-  
-      <div class="col-md-4 mb-3">
-        <div class="card ford-number-card p-3">
-          <h6>Total de Vendas</h6>
-          <h2>{{ selectedVehicle.volumetotal }}</h2>
-        </div>
-      </div>
-  
-      <div class="col-md-4 mb-3">
-        <div class="card ford-number-card p-3">
-          <h6>Veículos Conectados</h6>
-          <h2>{{ selectedVehicle.connected }}</h2>
-        </div>
-      </div>
-  
-      <div class="col-md-4 mb-3">
-        <div class="card ford-number-card p-3">
-          <h6>Software Atualizado</h6>
-          <h2>{{ selectedVehicle.softwareUpdates }}</h2>
-        </div>
-      </div>
-  
-    </div>
-  
-    <!-- 🔵 IMAGEM DO VEÍCULO -->
-    <div class="text-center mb-5" *ngIf="selectedVehicle">
-      <img [src]="selectedVehicle.img" class="vehicle-image" alt="Imagem do veículo">
-    </div>
-  
-    <!-- 🔵 CARD DE BUSCA POR VIN -->
-    <div class="card ford-card p-4 mb-4">
-      <h4 class="card-title">Consultar Código VIN</h4>
-      <div class="input-group mt-3">
-        <input type="text" class="form-control" placeholder="Digite o código VIN" [(ngModel)]="vinCode">
-        <button class="btn ford-btn" (click)="searchByVin()">Buscar</button>
-      </div>
-    </div>
-  
-    <!-- 🔵 EXIBIÇÃO DOS DADOS VIN -->
-    <div *ngIf="vinData" class="card ford-card p-4 mt-3">
-      <h4 class="card-title">Informações do VIN</h4>
-      <ul class="list-group mt-2">
-        <li class="list-group-item"><strong>Odômetro:</strong> {{ vinData.odometro }} km</li>
-        <li class="list-group-item"><strong>Nível de Combustível:</strong> {{ vinData.nivelCombustivel }}%</li>
-        <li class="list-group-item"><strong>Status:</strong> {{ vinData.status }}</li>
-        <li class="list-group-item"><strong>Latitude:</strong> {{ vinData.lat }}</li>
-        <li class="list-group-item"><strong>Longitude:</strong> {{ vinData.long }}</li>
-      </ul>
+  <!-- 🔵 CARD DE BUSCA POR VIN -->
+  <div class="card ford-card p-4 mb-4">
+    <h4 class="card-title">Consultar Código VIN</h4>
+    <div class="input-group mt-3">
+      <input type="text" class="form-control" placeholder="Digite o código VIN" [(ngModel)]="vinCode">
+      <button class="btn ford-btn" (click)="searchByVin()">Buscar</button>
     </div>
   </div>
+
+  <!-- 🔵 EXIBIÇÃO DOS DADOS VIN -->
+  <div *ngIf="vinData" class="card ford-card p-4 mt-3">
+    <h4 class="card-title">Informações do VIN</h4>
+    <ul class="list-group mt-2">
+      <li class="list-group-item"><strong>Odômetro:</strong> {{ vinData.odometro }} km</li>
+      <li class="list-group-item"><strong>Nível de Combustível:</strong> {{ vinData.nivelCombustivel }}%</li>
+      <li class="list-group-item"><strong>Status:</strong> {{ vinData.status }}</li>
+      <li class="list-group-item"><strong>Latitude:</strong> {{ vinData.lat }}</li>
+      <li class="list-group-item"><strong>Longitude:</strong> {{ vinData.long }}</li>
+    </ul>
+  </div>
+</div>
